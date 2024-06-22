@@ -1,5 +1,5 @@
 # django-visitor-ip
-Get Visitor IP Address in Django Project
+Get Visitor info in Django Project
 
 I am using python3.12.2 The packages that were installed: django, geoip2, django-user-agents
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.gis.geoip2 import GeoIP2
+from datetime import datetime
 
 def home(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -46,7 +47,8 @@ def home(request):
         "os_type":os_type,
         "os_version":os_version,
         "location_country": location_country,
-        "location_city": location_city
+        "location_city": location_city,
+        "visit_time": datetime.now().strftime('%Y-%m-%d  %H:%M:%S'),
     }
 
     return render(request, "home.html", context)
