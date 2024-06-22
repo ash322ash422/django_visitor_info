@@ -37,7 +37,7 @@ def home(request):
     except geoip2.errors.AddressNotFoundError:
         mock_ip = "108.174.10.10"
         location = g.city(mock_ip) #use dummy ip then
-        message = "NNNOTE-> USING MOCK IP SINCE YOU ARE RUNNING THIS LOCALLY."
+        message = "(NNNOTE-> USING MOCK IP SINCE YOU ARE RUNNING THIS LOCALLY)"
         #print(message)
         
     location_country = location["country_name"]
@@ -49,8 +49,8 @@ def home(request):
         "device_type": device_type,
         "browser_type": browser_type,
         "browser_version": browser_version,
-        "os_type":os_type,
-        "os_version":os_version,
+        "os_type": os_type,
+        "os_version": os_version,
         "location_country": location_country,
         "location_city": location_city,
         "visit_time": datetime.now().strftime('%Y-%m-%d  %H:%M:%S'),
