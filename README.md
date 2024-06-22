@@ -3,7 +3,7 @@ Get Visitor IP Address in Django Project
 
 I am using python3.12.2 The packages that were installed: django, geoip2, django-user-agents
 
-NOTE: The content of dir geoip:
+NOTE: The contents of dir django_visitor_info/VISITOR_INFO/geoip:
 
 .DS_Store
 
