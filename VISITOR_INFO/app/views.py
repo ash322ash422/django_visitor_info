@@ -16,44 +16,49 @@ def home(request):
     browser_version = ""
     os_type = ""
     os_version = ""
-
+    message = ""
+    
     if request.user_agent.is_mobile:
         device_type = "Mobile"
-    if request.user_agent.is_tablet:
+    elif request.user_agent.is_tablet:
         device_type = "Tablet"
-    if request.user_agent.is_pc:
+    elif request.user_agent.is_pc:
         device_type = "PC"
+    else:
+        device_type = "UNKNOWN DEVICE"
     
-    message = ""
+    http_host = request.META.get("HTTP_HOST")
     browser_type = request.user_agent.browser.family
     browser_version = request.user_agent.browser.version_string
     os_type = request.user_agent.os.family
     os_version = request.user_agent.os.version_string
     g = GeoIP2()
     
-    #NOTE Following is band-aid fix for error "AddressNotFoundError at /. The address 127.0.0.1 is not in the database."
+    #NOTE Following is fix for error "AddressNotFoundError at /. The address 127.0.0.1 is not in the database."
     try:
         location = g.city(ip)
     except geoip2.errors.AddressNotFoundError:
         mock_ip = "108.174.10.10"
         location = g.city(mock_ip) #use dummy ip then
-        message = "(NNNOTE-> USING MOCK IP SINCE YOU ARE RUNNING THIS LOCALLY)"
+        message = "(NNOTE-> FOR FOLLOWING I AM USING MOCK IP " + mock_ip + " SINCE YOU ARE RUNNING THIS LOCALLY)"
         #print(message)
         
     location_country = location["country_name"]
     location_city = location["city"]
 
     context = {
-        "message": message,
         "ip": ip,
+        "http_host": http_host,
+        "visit_time": datetime.now().strftime('%Y-%m-%d  %H:%M:%S'),
         "device_type": device_type,
         "browser_type": browser_type,
         "browser_version": browser_version,
         "os_type": os_type,
         "os_version": os_version,
+        
+        "message": message,
         "location_country": location_country,
         "location_city": location_city,
-        "visit_time": datetime.now().strftime('%Y-%m-%d  %H:%M:%S'),
     }
 
     return render(request, "home.html", context)

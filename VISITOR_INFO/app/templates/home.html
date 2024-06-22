@@ -8,13 +8,16 @@
 </head>
 <body>
     <h1>Hello visitor</h1>
-    <h3>You are visiting from :{{message}}</h3>
+    <h3>You are visiting from :</h3>
     <ul>
         <li>IP Address : {{ip}}</li>
+        <li>HTTP HOST : {{http_host}}</li>
         <li>Time of visit {{visit_time}}</li>
         <li>Device: {{ device_type}}</li>
         <li>Browser: {{browser_type}} {{browser_version}}</li>
         <li>OS: {{os_type}} {{os_version}}</li>
+        <p></p>
+        <h2>{{message}}</h2>
         <li>City: {{ location_city }}</li>
         <li>Country: {{ location_country }}</li>
     </ul>
